@@ -1,0 +1,47 @@
+name: JMeter Scheduled Tests
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # every day 3 AM UTC
+  workflow_dispatch:  # enable manual execution
+
+jobs:
+  run-jmeter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 JMeter Install
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-11-jre-headless
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz
+          tar -xzf apache-jmeter-5.5.tgz
+          echo "🔍 Verifying files..."
+          ls -l
+          ls -l apache-jmeter-5.5/bin
+
+      - name: 📂 Creating folders
+        run: |
+          mkdir -p jmeter/results
+          mkdir -p jmeter/global-report
+
+      - name: 🚀  JMeter Execution Test HTML
+        run: |
+          apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx -l jmeter/results/results.jtl -e -o jmeter/global-report
+
+      - name: 📁 Creating folder for reports
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          mkdir -p reports
+          cp -R jmeter/global-report reports/$TIMESTAMP
+          echo "Report generate in : reports/$TIMESTAMP"
+      
+      - name: 🌐 Publish reports in GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports
+          keep_files: true
