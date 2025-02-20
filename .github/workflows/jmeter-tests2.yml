@@ -1,4 +1,4 @@
-name: JMeter Scheduled Tests
+name: JMeter Scheduled Tests2
 
 on:
   schedule:
