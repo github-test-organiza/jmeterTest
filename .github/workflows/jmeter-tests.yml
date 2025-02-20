@@ -36,7 +36,8 @@ jobs:
         run: |
           git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages-temp || echo "No exist gh-pages yet"
           if [ -d gh-pages-temp/reports ]; then
-            cp -R gh-pages-temp/reports ./reports
+            mkdir -p reports
+            cp -R gh-pages-temp/reports/* ./reports
           fi
 
       - name: 📁 Creating folder for reports
@@ -44,7 +45,7 @@ jobs:
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
           mkdir -p reports
           cp -R jmeter/global-report reports/$TIMESTAMP
-          echo "Report generate in : reports/$TIMESTAMP"
+          echo "Report generated in: reports/$TIMESTAMP"
 
       - name: 📝 Generate report index
         run: |
