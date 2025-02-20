@@ -15,6 +15,15 @@ jobs:
 
       - name: 📦 JMeter Install
         run: |
+          curl --location 'https://lfav.atlassian.net/rest/api/2/issue/TD-61/comment' \
+          --header 'Accept: application/json' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Basic bHVpc2YuYXJyb3lhdmUxQGdtYWlsLmNvbTpBVEFUVDN4RmZHRjA2ODgxTGlWaTNRc2ZZSklnUW9VM3NXS0otNUF1eVFuWHA2TnV0NlRzaklydzRlZGdfak45YUY4WWhVSmZpRjAwVnRIV1p1WXZLejJoeXRoWndOUXBJcF9nVndjSjFNYjM0YjBiMklrNmdDUDkxX0JiWkotUzVZaDNNMXMxOEp5U3cwYWtpdkxOSkZ5c0loczh3dUZGLVJGbXJJOTltOVJBMjBEMnF1YkVvdWs9Rjk4MTk2Qjc=' \
+          --header 'Cookie: atlassian.xsrf.token=250244e08c61498449d5f6f3fb405f13368f68ce_lin' \
+          --data '{
+            "body": "Execution has started: https://github.com/github-test-organiza/jmeterTest/actions"
+          }'
+
           sudo apt update
           sudo apt install -y openjdk-11-jre-headless
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz
@@ -41,15 +50,6 @@ jobs:
           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
             -l jmeter/results/results.jtl -e -o jmeter/global-report
             
-          curl --location 'https://lfav.atlassian.net/rest/api/2/issue/TD-61/comment' \
-          --header 'Accept: application/json' \
-          --header 'Content-Type: application/json' \
-          --header 'Authorization: Basic bHVpc2YuYXJyb3lhdmUxQGdtYWlsLmNvbTpBVEFUVDN4RmZHRjA2ODgxTGlWaTNRc2ZZSklnUW9VM3NXS0otNUF1eVFuWHA2TnV0NlRzaklydzRlZGdfak45YUY4WWhVSmZpRjAwVnRIV1p1WXZLejJoeXRoWndOUXBJcF9nVndjSjFNYjM0YjBiMklrNmdDUDkxX0JiWkotUzVZaDNNMXMxOEp5U3cwYWtpdkxOSkZ5c0loczh3dUZGLVJGbXJJOTltOVJBMjBEMnF1YkVvdWs9Rjk4MTk2Qjc=' \
-          --header 'Cookie: atlassian.xsrf.token=250244e08c61498449d5f6f3fb405f13368f68ce_lin' \
-          --data '{
-            "body": "Execution has started: https://github.com/github-test-organiza/jmeterTest/actions"
-          }'
-
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
