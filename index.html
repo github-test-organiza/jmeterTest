@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,8 @@
     .report-card:hover {
       transform: scale(1.03);
     }
-    .card-title {
-      font-size: 1.25rem;
+    .filter-container {
+      margin-bottom: 30px;
     }
     .footer {
       margin-top: 50px;
@@ -35,139 +35,162 @@
     </div>
   </nav>
   <div class="container">
-    <div class="row">
-          <div class="col-md-4 mb-4">
+    <div class="row filter-container">
+      <div class="col-md-6">
+        <label for="productFilter" class="form-label">Filter by Product:</label>
+        <select id="productFilter" class="form-select">
+          <option value="all">All</option>
+          <option value="Data governance">Data governance</option>
+          <option value="ATM">ATM</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="dateFilter" class="form-label">Filter by Date:</label>
+        <input type="date" id="dateFilter" class="form-control">
+      </div>
+    </div>
+    <div class="row" id="cardsContainer">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-000720</h5>
-                <p class="card-text">Reporte generado el 20250220-000720. Haz clic para ver el detalle.</p>
-                <a href="20250220-000720/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 00:07</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 00:07. Click to view details.</p>
+                <a href="20250220-000720/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-001227</h5>
-                <p class="card-text">Reporte generado el 20250220-001227. Haz clic para ver el detalle.</p>
-                <a href="20250220-001227/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 00:12</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 00:12. Click to view details.</p>
+                <a href="20250220-001227/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-010154</h5>
-                <p class="card-text">Reporte generado el 20250220-010154. Haz clic para ver el detalle.</p>
-                <a href="20250220-010154/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 01:01</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 01:01. Click to view details.</p>
+                <a href="20250220-010154/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-011321</h5>
-                <p class="card-text">Reporte generado el 20250220-011321. Haz clic para ver el detalle.</p>
-                <a href="20250220-011321/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 01:13</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 01:13. Click to view details.</p>
+                <a href="20250220-011321/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-013129</h5>
-                <p class="card-text">Reporte generado el 20250220-013129. Haz clic para ver el detalle.</p>
-                <a href="20250220-013129/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 01:31</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 01:31. Click to view details.</p>
+                <a href="20250220-013129/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-013657</h5>
-                <p class="card-text">Reporte generado el 20250220-013657. Haz clic para ver el detalle.</p>
-                <a href="20250220-013657/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 01:36</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 01:36. Click to view details.</p>
+                <a href="20250220-013657/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-032608</h5>
-                <p class="card-text">Reporte generado el 20250220-032608. Haz clic para ver el detalle.</p>
-                <a href="20250220-032608/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 03:26</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 03:26. Click to view details.</p>
+                <a href="20250220-032608/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-144056</h5>
-                <p class="card-text">Reporte generado el 20250220-144056. Haz clic para ver el detalle.</p>
-                <a href="20250220-144056/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 14:40</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 14:40. Click to view details.</p>
+                <a href="20250220-144056/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-144654</h5>
-                <p class="card-text">Reporte generado el 20250220-144654. Haz clic para ver el detalle.</p>
-                <a href="20250220-144654/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 14:46</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 14:46. Click to view details.</p>
+                <a href="20250220-144654/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-145722</h5>
-                <p class="card-text">Reporte generado el 20250220-145722. Haz clic para ver el detalle.</p>
-                <a href="20250220-145722/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 14:57</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 14:57. Click to view details.</p>
+                <a href="20250220-145722/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-154633</h5>
-                <p class="card-text">Reporte generado el 20250220-154633. Haz clic para ver el detalle.</p>
-                <a href="20250220-154633/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 15:46</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 15:46. Click to view details.</p>
+                <a href="20250220-154633/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-161037</h5>
-                <p class="card-text">Reporte generado el 20250220-161037. Haz clic para ver el detalle.</p>
-                <a href="20250220-161037/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 16:10</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 16:10. Click to view details.</p>
+                <a href="20250220-161037/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-162635</h5>
-                <p class="card-text">Reporte generado el 20250220-162635. Haz clic para ver el detalle.</p>
-                <a href="20250220-162635/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 16:26</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 16:26. Click to view details.</p>
+                <a href="20250220-162635/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-163544</h5>
-                <p class="card-text">Reporte generado el 20250220-163544. Haz clic para ver el detalle.</p>
-                <a href="20250220-163544/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 16:35</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 16:35. Click to view details.</p>
+                <a href="20250220-163544/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
             <div class="card report-card">
               <div class="card-body">
-                <h5 class="card-title">20250220-164249</h5>
-                <p class="card-text">Reporte generado el 20250220-164249. Haz clic para ver el detalle.</p>
-                <a href="20250220-164249/" class="btn btn-primary">Ver Reporte</a>
+                <h5 class="card-title">Data governance - 20 Feb 2025 16:42</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 16:42. Click to view details.</p>
+                <a href="20250220-164249/" class="btn btn-primary">View Report</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4" data-product="Data governance" data-date="2025-02-20">
+            <div class="card report-card">
+              <div class="card-body">
+                <h5 class="card-title">Data governance - 20 Feb 2025 16:52</h5>
+                <p class="card-text">Report generated on 20 Feb 2025 16:52. Click to view details.</p>
+                <a href="20250220-165217/" class="btn btn-primary">View Report</a>
               </div>
             </div>
           </div>
@@ -175,9 +198,25 @@
   </div>
   <footer class="footer">
     <div class="container">
-      <p>&copy; $(date +%Y) JMeter Reports Dashboard. Todos los derechos reservados.</p>
+      <p>&copy; $(date +%Y) JMeter Reports Dashboard. All rights reserved.</p>
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('productFilter').addEventListener('change', filterCards);
+    document.getElementById('dateFilter').addEventListener('change', filterCards);
+    function filterCards() {
+      var productValue = document.getElementById('productFilter').value;
+      var dateValue = document.getElementById('dateFilter').value;
+      var cards = document.querySelectorAll('#cardsContainer > .col-md-4');
+      cards.forEach(function(card) {
+        var cardProduct = card.getAttribute('data-product');
+        var cardDate = card.getAttribute('data-date');
+        var productMatch = (productValue === 'all' || cardProduct === productValue);
+        var dateMatch = (!dateValue || cardDate === dateValue);
+        card.style.display = (productMatch && dateMatch) ? 'block' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
