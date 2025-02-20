@@ -1,5 +1,7 @@
 name: JMeter Scheduled Tests
-
+env:
+  TIMESTAMP: 1
+  
 on:
   schedule:
     - cron: '0 3 * * *'  # every day 3 AM UTC
@@ -66,7 +68,7 @@ jobs:
 
       - name: Create folder for current report
         run: |
-          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          $TIMESTAMP=$(date +%Y%m%d-%H%M%S)
           mkdir -p reports
           cp -R jmeter/global-report reports/$TIMESTAMP
           echo "Report generated in: reports/$TIMESTAMP"
