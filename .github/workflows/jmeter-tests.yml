@@ -32,6 +32,13 @@ jobs:
         run: |
           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx -l jmeter/results/results.jtl -e -o jmeter/global-report
 
+      - name: ⬇️ gh-pages Clones (si existe)
+        run: |
+          git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages-temp || echo "No exist gh-pages yet"
+          if [ -d gh-pages-temp/reports ]; then
+            cp -R gh-pages-temp/reports ./reports
+          fi
+
       - name: 📁 Creating folder for reports
         run: |
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
