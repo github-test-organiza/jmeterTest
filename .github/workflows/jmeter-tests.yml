@@ -36,8 +36,8 @@ jobs:
           -l jmeter/results/results.jtl -e -o jmeter/global-report
         env:
           # GROUP_NAME: ${{ secrets.GROUP_NAME }}
-          PERIOD: ${{ secrets.PERIOD }}
-          THREADS: ${{ secrets.THREADS }}
+          PERIOD: ${{ variables.PERIOD }}
+          THREADS: ${{ variables.THREADS }}
 
       # Clonamos la rama gh-pages en un directorio aparte
       - name: Checkout gh-pages branch
