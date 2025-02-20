@@ -33,8 +33,8 @@ jobs:
           PERIOD: ${{ vars.PERIOD }}
           THREADS: ${{ vars.THREADS }}
         run: |
-          sed -i "s/\${__P(threads, 1)}/$THREAD_COUNT/g" jmeter/test_plan.jmx
-          sed -i "s/\${__P(rampup, 1)}/$RAMPUP_PERIOD/g" jmeter/test_plan.jmx
+          sed -i "s/\${THREADS}/$THREADS/g" jmeter/test_plan.jmx
+          sed -i "s/\${PERIOD}/$PERIOD/g" jmeter/test_plan.jmx
 
       - name: 🚀 Run JMeter Test HTML
         run: |
