@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 checkout code
+      - name: 📥 Checkout code (branch principal)
         uses: actions/checkout@v4
 
       - name: 📦 JMeter Install
@@ -23,34 +23,43 @@ jobs:
           ls -l
           ls -l apache-jmeter-5.5/bin
 
-      - name: 📂 Creating folders
+      - name: 📂 Create folders for JMeter
         run: |
           mkdir -p jmeter/results
           mkdir -p jmeter/global-report
 
-      - name: 🚀  JMeter Execution Test HTML
+      - name: 🚀 Run JMeter Test HTML
         run: |
           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx -l jmeter/results/results.jtl -e -o jmeter/global-report
 
-      - name: ⬇️ gh-pages Clone
+      # Clonamos la rama gh-pages en un directorio aparte
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      # Copiamos el contenido previo (los reportes antiguos) desde gh-pages a nuestro directorio 'reports'
+      - name: Copy previous reports from gh-pages
         run: |
-          git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages-temp || echo "No exist gh-pages yet"
-          if [ -d gh-pages-temp/reports ]; then
+          if [ -d gh-pages/reports ]; then
             mkdir -p reports
-            cp -R gh-pages-temp/reports/* ./reports
+            cp -R gh-pages/reports/* reports/
           fi
 
-      - name: 📁 Creating folder for reports
+      # Creamos la carpeta para el reporte actual (con timestamp) y copiamos el reporte generado
+      - name: Create folder for current report
         run: |
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
           mkdir -p reports
           cp -R jmeter/global-report reports/$TIMESTAMP
           echo "Report generated in: reports/$TIMESTAMP"
 
-      - name: 📝 Generate report index
+      # Generamos un índice que liste todos los subdirectorios (reportes) en 'reports'
+      - name: Generate report index
         run: |
           echo "<html><head><title>JMeter Reports</title></head><body>" > reports/index.html
-          echo "<h1>JMeter Report</h1><ul>" >> reports/index.html
+          echo "<h1>JMeter Reports</h1><ul>" >> reports/index.html
           for dir in reports/*/ ; do
             [ -d "$dir" ] || continue
             dirname=$(basename "$dir")
@@ -59,7 +68,8 @@ jobs:
             fi
           done
           echo "</ul></body></html>" >> reports/index.html
-      
+
+      # Publicamos todo el contenido del directorio 'reports'
       - name: 🌐 Publish reports in GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
