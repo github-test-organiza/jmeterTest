@@ -35,7 +35,7 @@ jobs:
           -Jrampup=$PERIOD \
           -Jthreadgroup=$GROUP_NAME \
         env:
-          GROUP_NAME: ${{ secrets.GROUP_NAME }}
+          # GROUP_NAME: ${{ secrets.GROUP_NAME }}
           PERIOD: ${{ secrets.PERIOD }}
           THREADS: ${{ secrets.THREADS }}
 
