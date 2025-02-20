@@ -30,10 +30,10 @@ jobs:
 
       - name: 🚀 Run JMeter Test HTML
         run: |
-          apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx -l jmeter/results/results.jtl -e -o jmeter/global-report \
+          apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
           -Jthreads=$THREADS \
           -Jrampup=$PERIOD \
-          -Jthreadgroup=$GROUP_NAME \
+          -l jmeter/results/results.jtl -e -o jmeter/global-report
         env:
           # GROUP_NAME: ${{ secrets.GROUP_NAME }}
           PERIOD: ${{ secrets.PERIOD }}
