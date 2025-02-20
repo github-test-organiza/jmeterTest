@@ -38,6 +38,19 @@ jobs:
           mkdir -p reports
           cp -R jmeter/global-report reports/$TIMESTAMP
           echo "Report generate in : reports/$TIMESTAMP"
+
+      - name: 📝 Generate report index
+        run: |
+          echo "<html><head><title>JMeter Reports</title></head><body>" > reports/index.html
+          echo "<h1>JMeter Report</h1><ul>" >> reports/index.html
+          for dir in reports/*/ ; do
+            [ -d "$dir" ] || continue
+            dirname=$(basename "$dir")
+            if [ "$dirname" != "index.html" ]; then
+              echo "<li><a href=\"${dirname}/\">${dirname}</a></li>" >> reports/index.html
+            fi
+          done
+          echo "</ul></body></html>" >> reports/index.html
       
       - name: 🌐 Publish reports in GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
