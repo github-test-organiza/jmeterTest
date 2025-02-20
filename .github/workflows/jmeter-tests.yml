@@ -71,15 +71,6 @@ jobs:
           cp -R jmeter/global-report reports/$TIMESTAMP
           echo "Report generated in: reports/$TIMESTAMP"
 
-          curl --location 'https://lfav.atlassian.net/rest/api/2/issue/TD-61/comment' \
-          --header 'Accept: application/json' \
-          --header 'Content-Type: application/json' \
-          --header 'Authorization: Basic bHVpc2YuYXJyb3lhdmUxQGdtYWlsLmNvbTpBVEFUVDN4RmZHRjA2ODgxTGlWaTNRc2ZZSklnUW9VM3NXS0otNUF1eVFuWHA2TnV0NlRzaklydzRlZGdfak45YUY4WWhVSmZpRjAwVnRIV1p1WXZLejJoeXRoWndOUXBJcF9nVndjSjFNYjM0YjBiMklrNmdDUDkxX0JiWkotUzVZaDNNMXMxOEp5U3cwYWtpdkxOSkZ5c0loczh3dUZGLVJGbXJJOTltOVJBMjBEMnF1YkVvdWs9Rjk4MTk2Qjc=' \
-          --header 'Cookie: atlassian.xsrf.token=250244e08c61498449d5f6f3fb405f13368f68ce_lin' \
-          --data "{
-            \"body\": \"Execution has finished: https://github-test-organiza.github.io/jmeterTest/$TIMESTAMP\"
-          }"
-
       - name: 📝 Generate advanced report index
         run: |
           cat << 'EOF' > reports/index.html
@@ -156,3 +147,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./reports
           keep_files: true
+
+      - name: ✅ Log results
+        run: |
+          curl --location 'https://lfav.atlassian.net/rest/api/2/issue/TD-61/comment' \
+          --header 'Accept: application/json' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Basic bHVpc2YuYXJyb3lhdmUxQGdtYWlsLmNvbTpBVEFUVDN4RmZHRjA2ODgxTGlWaTNRc2ZZSklnUW9VM3NXS0otNUF1eVFuWHA2TnV0NlRzaklydzRlZGdfak45YUY4WWhVSmZpRjAwVnRIV1p1WXZLejJoeXRoWndOUXBJcF9nVndjSjFNYjM0YjBiMklrNmdDUDkxX0JiWkotUzVZaDNNMXMxOEp5U3cwYWtpdkxOSkZ5c0loczh3dUZGLVJGbXJJOTltOVJBMjBEMnF1YkVvdWs9Rjk4MTk2Qjc=' \
+          --header 'Cookie: atlassian.xsrf.token=250244e08c61498449d5f6f3fb405f13368f68ce_lin' \
+          --data "{
+            \"body\": \"Execution has finished: https://github-test-organiza.github.io/jmeterTest/$TIMESTAMP\"
+          }"
