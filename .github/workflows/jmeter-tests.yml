@@ -28,15 +28,18 @@ jobs:
           mkdir -p jmeter/results
           mkdir -p jmeter/global-report
 
-      - name: 🚀 Run JMeter Test HTML
-        run: |
-           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
-            -JTHREADS=$THREADS \
-            -JPERIOD=$PERIOD \
-            -l jmeter/results/results.jtl -e -o jmeter/global-report
+      - name: ✍️ Preprocess JMX file
         env:
           PERIOD: ${{ vars.PERIOD }}
           THREADS: ${{ vars.THREADS }}
+        run: |
+          sed -i "s/\${__P(threads, 1)}/$THREAD_COUNT/g" jmeter/test_plan.jmx
+          sed -i "s/\${__P(rampup, 1)}/$RAMPUP_PERIOD/g" jmeter/test_plan.jmx
+
+      - name: 🚀 Run JMeter Test HTML
+        run: |
+           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
+            -l jmeter/results/results.jtl -e -o jmeter/global-report
 
       # Clonamos la rama gh-pages en un directorio separado
       - name: Checkout gh-pages branch
