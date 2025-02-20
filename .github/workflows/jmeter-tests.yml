@@ -36,9 +36,9 @@ jobs:
           -Jthreadgroup=$GROUP_NAME \
           -l results.jtl
         env:
-        GROUP_NAME: ${{ secrets.GROUP_NAME }}
-        PERIOD: ${{ secrets.PERIOD }}
-        THREADS: ${{ secrets.THREADS }}
+          GROUP_NAME: ${{ secrets.GROUP_NAME }}
+          PERIOD: ${{ secrets.PERIOD }}
+          THREADS: ${{ secrets.THREADS }}
 
       # Clonamos la rama gh-pages en un directorio aparte
       - name: Checkout gh-pages branch
