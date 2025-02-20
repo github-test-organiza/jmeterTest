@@ -31,27 +31,26 @@ jobs:
       - name: 🚀 Run JMeter Test HTML
         run: |
           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
-          -Jthreads=$THREADS \
-          -Jrampup=$PERIOD \
-          -l jmeter/results/results.jtl -e -o jmeter/global-report
+            -Jthreads=$THREADS -Jrampup=$PERIOD \
+            -l jmeter/results/results.jtl -e -o jmeter/global-report
         env:
-          # GROUP_NAME: ${{ secrets.GROUP_NAME }}
           PERIOD: ${{ vars.PERIOD }}
           THREADS: ${{ vars.THREADS }}
 
-      # Clonamos la rama gh-pages en un directorio aparte
+      # Clonamos la rama gh-pages en un directorio separado
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages
 
-      # Copiamos el contenido previo (los reportes antiguos) desde gh-pages a nuestro directorio 'reports'
-      - name: Copy previous reports from gh-pages
+      # Fusionamos (copiamos) todo el contenido previamente publicado al directorio local "reports"
+      - name: Merge previous reports from gh-pages branch
         run: |
-          if [ -d gh-pages/reports ]; then
-            mkdir -p reports
-            cp -R gh-pages/reports/* reports/
+          rm -rf reports
+          mkdir -p reports
+          if [ -d gh-pages ]; then
+            cp -R gh-pages/* reports/
           fi
 
       # Creamos la carpeta para el reporte actual (con timestamp) y copiamos el reporte generado
@@ -62,7 +61,7 @@ jobs:
           cp -R jmeter/global-report reports/$TIMESTAMP
           echo "Report generated in: reports/$TIMESTAMP"
 
-      # Generamos un índice que liste todos los subdirectorios (reportes) en 'reports'
+      # Generamos un índice HTML que liste todas las carpetas (reportes) dentro de "reports"
       - name: Generate report index
         run: |
           echo "<html><head><title>JMeter Reports</title></head><body>" > reports/index.html
@@ -76,7 +75,7 @@ jobs:
           done
           echo "</ul></body></html>" >> reports/index.html
 
-      # Publicamos todo el contenido del directorio 'reports'
+      # Publicamos todo el contenido del directorio "reports"
       - name: 🌐 Publish reports in GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
