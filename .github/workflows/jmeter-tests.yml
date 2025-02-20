@@ -28,33 +28,23 @@ jobs:
           mkdir -p jmeter/results
           mkdir -p jmeter/global-report
 
-      - name: ✍️ Preprocess JMX file
-        env:
-          PERIOD: ${{ vars.PERIOD }}
-          THREADS: ${{ vars.THREADS }}
-        run: |
-          sed -i "s/\${__P(threads, 1)}/$THREAD_COUNT/g" jmeter/test_plan.jmx
-          sed -i "s/\${__P(rampup, 1)}/$RAMPUP_PERIOD/g" jmeter/test_plan.jmx
-
       - name: 🚀 Run JMeter Test HTML
         run: |
-           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
-            -l jmeter/results/results.jtl -e -o jmeter/global-report
+          apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx -l jmeter/results/results.jtl -e -o jmeter/global-report
 
-      # Clonamos la rama gh-pages en un directorio separado
+      # Clonamos la rama gh-pages en un directorio aparte
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages
 
-      # Fusionamos (copiamos) todo el contenido previamente publicado al directorio local "reports"
-      - name: Merge previous reports from gh-pages branch
+      # Copiamos el contenido previo (los reportes antiguos) desde gh-pages a nuestro directorio 'reports'
+      - name: Copy previous reports from gh-pages
         run: |
-          rm -rf reports
-          mkdir -p reports
-          if [ -d gh-pages ]; then
-            cp -R gh-pages/* reports/
+          if [ -d gh-pages/reports ]; then
+            mkdir -p reports
+            cp -R gh-pages/reports/* reports/
           fi
 
       # Creamos la carpeta para el reporte actual (con timestamp) y copiamos el reporte generado
@@ -65,7 +55,7 @@ jobs:
           cp -R jmeter/global-report reports/$TIMESTAMP
           echo "Report generated in: reports/$TIMESTAMP"
 
-      # Generamos un índice HTML que liste todas las carpetas (reportes) dentro de "reports"
+      # Generamos un índice que liste todos los subdirectorios (reportes) en 'reports'
       - name: 📝 Generate report index with improved design
         run: |
           cat << 'EOF' > reports/index.html
@@ -107,7 +97,7 @@ jobs:
           EOF
 
 
-      # Publicamos todo el contenido del directorio "reports"
+      # Publicamos todo el contenido del directorio 'reports'
       - name: 🌐 Publish reports in GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
