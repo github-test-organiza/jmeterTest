@@ -30,8 +30,9 @@ jobs:
 
       - name: 🚀 Run JMeter Test HTML
         run: |
-          apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
-            -Jthreads=$THREADS -Jrampup=$PERIOD \
+           apache-jmeter-5.5/bin/jmeter -n -t jmeter/test_plan.jmx \
+            -JTHREADS=$THREADS \
+            -JPERIOD=$PERIOD \
             -l jmeter/results/results.jtl -e -o jmeter/global-report
         env:
           PERIOD: ${{ vars.PERIOD }}
