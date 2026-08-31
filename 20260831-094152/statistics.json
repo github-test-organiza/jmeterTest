@@ -1,0 +1,34 @@
+{
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 10,
+    "errorCount" : 10,
+    "errorPct" : 100.0,
+    "meanResTime" : 103.50000000000003,
+    "medianResTime" : 22.5,
+    "minResTime" : 17.0,
+    "maxResTime" : 820.0,
+    "pct1ResTime" : 741.4000000000003,
+    "pct2ResTime" : 820.0,
+    "pct3ResTime" : 820.0,
+    "throughput" : 0.37159525844450225,
+    "receivedKBytesPerSec" : 0.10523693842666568,
+    "sentKBytesPerSec" : 0.052255583218758124
+  },
+  "HTTP Request" : {
+    "transaction" : "HTTP Request",
+    "sampleCount" : 10,
+    "errorCount" : 10,
+    "errorPct" : 100.0,
+    "meanResTime" : 103.50000000000003,
+    "medianResTime" : 22.5,
+    "minResTime" : 17.0,
+    "maxResTime" : 820.0,
+    "pct1ResTime" : 741.4000000000003,
+    "pct2ResTime" : 820.0,
+    "pct3ResTime" : 820.0,
+    "throughput" : 0.37159525844450225,
+    "receivedKBytesPerSec" : 0.10523693842666568,
+    "sentKBytesPerSec" : 0.052255583218758124
+  }
+}
